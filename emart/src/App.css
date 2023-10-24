@@ -1,0 +1,18 @@
+:root {
+  --bg-color: #fff;
+  /* --border: 2px solid blue; */
+  --primary-font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+
+}
+
+button {
+  --color: rgb(9, 9, 9);
+  /* --border: 2px solid rgb(0, 0, 0); */
+  --border-radius: 5px;
+}
+.bars{
+  display: none;
+}
+*{
+  box-sizing: border-box;
+}

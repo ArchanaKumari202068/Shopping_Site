@@ -1,0 +1,89 @@
+.Img_bg_Home {
+    height: 100vh;
+    width: 100%;
+    position: relative;
+    text-align: center;
+    background-attachment: fixed;
+    background-image: url("../assest/home-new-bg-free-img.jpg");
+    background-size: cover;
+
+
+}
+
+
+.Home_text_container {
+    position: absolute;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    text-align: justify;
+    background-color: rgba(15, 71, 99, 0.6);
+    width: 100%;
+    height: 100%;
+    padding: 3em;
+    gap: 2em;
+
+}
+
+.Home_text_container h1,
+h3 {
+    /* font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif; */
+    text-align: left;
+    width: 50%;
+}
+
+.Home_text_container h1 {
+    font-size: 5rem;
+    font-weight: 600;
+    font-family: var(--primary-font-family);
+}
+
+.Home_text_container h3 {
+    font-size: 2rem;
+    font-weight: 600;
+    font-family: var(--primary-font-family);
+}
+
+.Home_buttons {
+    height: 4em;
+    width: 25em;
+    display: flex;
+    flex-direction: row;
+    gap: 1em;
+    font-size: 0.7rem;
+    font-family: sans-serif;
+
+}
+
+.Home_buttons button {
+    width: 100%;
+    height: 100%;
+    border: none;
+}
+
+.shop_buttons {
+    font-size: 0.9rem;
+
+}
+
+.shop_buttons:hover {
+    background-color: black;
+    color: white;
+
+}
+
+.find_buttons {
+    background-color: transparent;
+    border: 1px solid white;
+    color: #ffffff;
+    font-size: 0.9rem;
+    font-weight: 300;
+    font-family: var(--primary-font-family);
+}
+
+.find_buttons:hover {
+    background-color: white;
+    color: #1E1810;
+}
