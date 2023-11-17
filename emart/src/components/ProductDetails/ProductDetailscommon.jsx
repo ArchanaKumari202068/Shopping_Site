@@ -11,9 +11,14 @@ const ProductDetailscommon = (props) => {
   const { id } = useParams();
 
   useEffect(() => {
-    axios
-      .get(`http://localhost:5000/ProductDetails/${id}`)
-      .then((res) => setProduct(res.data));
+    try{
+
+      axios
+        .get(`http://localhost:5000/ProductDetails/${id}`)
+        .then((res) => setProduct(res.data));
+    }catch(err){
+      console.log(err)
+    }
   }, []);
   // const parameters = useParams();
   console.log(id)
@@ -22,7 +27,7 @@ const ProductDetailscommon = (props) => {
     <>
       <div className="Product_details_main_page">
         <div className="Product_details_img">
-          <img src={props.Product_img} />
+          <img src={product.product_img} />
         </div>
         <div className="Product_details_content">
           <div className="product_nav">

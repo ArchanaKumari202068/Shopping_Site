@@ -1,7 +1,11 @@
 import React from 'react'
 import "./Footer.css"
 import FooterLogoimg from "../assest/logo@2x-free-img.png"
+
+
+
 const Footer = () => {
+
   return (
     <>
     <div className='Footer'>
@@ -65,6 +69,8 @@ const Footer = () => {
     <i class="fa fa-linkedin"></i>
     <i class="fa fa-github"></i>
     </div>
+
+ 
 </div>
 </>
   )

@@ -124,3 +124,29 @@
 .mobile{
     display: none;
 }
+#search_icon{
+    /* height: 40px;
+    width: 400px;
+    border: 2px solid rgb(21, 33, 57);
+    border-radius: 5px; */
+    height: 2em;
+    width: 25em;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    border: 2px solid rgb(22, 22, 93);
+
+}
+#search_input{
+    display: flex;
+    height: 100%;
+    width: 100%;
+    border: none;
+    border-radius: 5px;
+    outline: none;
+    
+}
+.search_bar{
+    height:2rem;
+    width: 2rem;
+}

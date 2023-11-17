@@ -12,6 +12,7 @@ var fs = require("fs");
 var { parse } = require("csv-parse");
 
 var parser = parse({ columns: true }, async function (err, csvData) {
+  //delete the previous data and 
   await Product.deleteMany();
   csvData.forEach((product) => {
     var new_products = new Product({
