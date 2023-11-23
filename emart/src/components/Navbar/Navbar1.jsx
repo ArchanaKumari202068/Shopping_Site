@@ -10,6 +10,15 @@ const Navbar1 = () => {
   const handleOnClick = () => {
     setBars(!bars);
   };
+  const handleRemoveToken = () => {
+    try {
+      const removeToken = localStorage.removeItem("jwtToken");
+      console.log(removeToken);
+      userContext.setUser(null);
+    } catch (error) {
+      console.log("error in signout")
+    }
+  };
 
   return (
     <>
@@ -28,7 +37,7 @@ const Navbar1 = () => {
             </div>
 
             <ul>
-              <li id="brand_titile">AK COLLECTION</li>
+              <li id="brand_titile">AK</li>
             </ul>
             <div className="Menu">
               <ul>
@@ -39,10 +48,16 @@ const Navbar1 = () => {
                   <Link to="/">Products</Link>
                 </li>
                 <li>
-                  <Link to="/">Women</Link>
+                  <Link to="/women">Women</Link>
                 </li>
                 <li>
                   <Link to="/">Men</Link>
+                </li>
+                <li>
+                  <Link to="/">About</Link>
+                </li>
+                <li>
+                  <Link to="/">Contact</Link>
                 </li>
               </ul>
             </div>
@@ -65,9 +80,14 @@ const Navbar1 = () => {
             </div>
             <div className="buttons_nav">
               {userContext.user ? (
-                <button>
-                  <i className="fa fa-shopping-cart"></i>Cart 0
-                </button>
+                <>
+                  <button>
+                    <i className="fa fa-shopping-cart"></i>Cart 0
+                  </button>
+                  <button onClick={handleRemoveToken}>
+                    <i className="fa fa-user-plus"></i>SignOut
+                  </button>
+                </>
               ) : (
                 <>
                   <Link to="/login">

@@ -10,9 +10,9 @@ const MainPage = () => {
   return (
     <>
       {/* <Navbar1 /> */}
-      <Home />
-      <Home_cards />
-      <ProductsPage />
+      <Home/>
+      <Home_cards/>
+      <ProductsPage/>
      
       {/* <Features /> */}
       {/* <ProductCards /> */}

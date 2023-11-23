@@ -1,10 +1,12 @@
 import React, { useState, useContext } from "react";
+import {useNavigate} from "react-router-dom"
 import "./Login.css";
 import axios from "axios";
 import { contextCreated } from "../useContext/Context";
 // import { contextCreated } from "../useContext/Context";
 
 const Login = () => {
+  const navigate =useNavigate()
   const [email, setEmail] = useState();
   const [password, setPassword] = useState();
   const a = useContext(contextCreated);
@@ -18,15 +20,14 @@ const Login = () => {
         Email: email,
         Password: password,
       });
-      const auth = await axios.post("http://localhost:5000/auth", {
-        token: login.data.logintoken,
-      });
-      //store token into localstorage
-      localStorage.setItem("jwtToken",login.data.logintoken)
-      console.log(auth.data.id);
+      console.log(login.data.logintoken)
+       localStorage.setItem("jwt",login.data.logintoken)
+      
 
-      console.log(login.data.logintoken);
-      console.log(a.setUser(auth.data.id));
+
+
+      
+      navigate("/")
     } catch (err) {
       console.log(err);
       alert("Do not have account SignUp");

@@ -5,23 +5,24 @@ import Product3Img from "../assest/product-accessory2-400x400.jpg";
 import Product4Img from "../assest/product-bag1-400x400.jpg";
 import ProductCards from "../Products/ProductCards";
 import axios from "axios";
-import {useParams} from 'react-router-dom'
+import { useParams } from "react-router-dom";
+import Reviews from "./Reviews/Reviews";
 const ProductDetailscommon = (props) => {
-  const [product, setProduct] = useState({});
+  const [product, setProduct] = useState(true);
+  const [showContainer, setshowContainer] = useState("description");
   const { id } = useParams();
 
   useEffect(() => {
-    try{
-
+    try {
       axios
         .get(`http://localhost:5000/ProductDetails/${id}`)
         .then((res) => setProduct(res.data));
-    }catch(err){
-      console.log(err)
+    } catch (err) {
+      console.log(err);
     }
   }, []);
   // const parameters = useParams();
-  console.log(id)
+  console.log(id);
 
   return (
     <>
@@ -55,15 +56,27 @@ const ProductDetailscommon = (props) => {
             <p>
               Categories: <a>{product.product_categories}</a>
             </p>
+            <p>Rating: </p>
           </div>
         </div>
       </div>
-      <div className="product-desc">
-        <h3>Product description</h3>
-        <div className="product_description">
-          <p>{product.product_about}</p>
+      <div className="sub-section">
+        <div className="btns">
+          <button onClick={()=>{setshowContainer("description")}}>Descripstion</button>
+          <button onClick={()=>{setshowContainer("reviews")}}>Reviews</button>
         </div>
+        {showContainer == "description" ? (
+          <div className="product-desc">
+            <h3>Product description</h3>
+            <div className="product_description">
+              <p>{product.product_about}</p>
+            </div>
+          </div>
+        ) : (
+          <Reviews />
+        )}
       </div>
+
       <div className="related_product_container">
         <h1>Related products</h1>
         <div className="related_product">

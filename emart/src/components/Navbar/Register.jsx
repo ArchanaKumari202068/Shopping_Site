@@ -1,9 +1,11 @@
 import React, { useState,useContext} from "react";
+import {useNavigate} from "react-router-dom"
 import "./Register.css";
 import axios from "axios";
 import { contextCreated } from "../useContext/Context";
 
 const Register = () => {
+  const navigate = useNavigate()
   const [name, setName] = useState();
   const [email, setEmail] = useState();
   const [password, setPassword] = useState();
@@ -26,12 +28,12 @@ const Register = () => {
           Email: email,
         })
         // .then( (res) => {
-          localStorage.setItem("jwtToken", getToken.data.token);
+          localStorage.setItem("jwt", getToken.data.token);
           console.log(getToken.data.user_id);
         // });
         console.log(getToken)
         const sendToken = await axios.post("http://localhost:5000/auth", {
-          token: localStorage.getItem("jwtToken"),
+          token: localStorage.getItem("jwt"),
 
         })
         
@@ -47,6 +49,7 @@ const Register = () => {
       }
     }
     AuthenticateUser()
+    navigate("/")
 
     // const token =createToken(res.data.user_id)
     

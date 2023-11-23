@@ -25,19 +25,15 @@ const LogInData = async (req, res) => {
       Email: req.body.Email,
       Password: req.body.Password,
     });
-    if(!existingUser){
-      return res.status(400).send({msg:"Usernot found"})
+    if (!existingUser) {
+      return res.status(400).send({ msg: "Usernot found" });
     }
 
     //login token
 
-
     const logintoken = createToken(String(existingUser._id));
     console.log("logintoken: ", logintoken);
-    res.status(200).send({msg:"User login successfully",logintoken});
-324
-    
-
+    res.status(200).send({ msg: "User login successfully", logintoken });
 
     // console.log(existingUser);
     // if (existingUser) {
