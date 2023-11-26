@@ -17,7 +17,7 @@ const Login = () => {
     // useEffect( ()=>{w
     try {
       console.log("check1");
-      const login = await axios.post("http://localhost:5000/login", {
+      const login = await axios.post(`${process.env.REACT_APP_BACKEND_URL}/login`, {
         Email: email,
         Password: password,
       });

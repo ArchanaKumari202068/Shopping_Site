@@ -33,8 +33,9 @@ const Cart = (props) => {
     try {
       // const userId = id.setUser()
       const id = await axios.get(
-        `http://localhost:5000/cart/${checkUser.user}`
+        `${process.env.REACT_APP_BACKEND_URL}/cart/${checkUser.user}`
       );
+
 
       // console.log("id.data", id.data);
       var x = id.data;
@@ -70,6 +71,7 @@ const Cart = (props) => {
     <>
       <div className="Cart_page">
         <div id="Cart_header">
+          <h1>{process.env.REACT_APP_BACKEND_URL}</h1>
           <h1>Cart</h1>
           <h2>TotalPrice:{totalprice}</h2>
         </div>

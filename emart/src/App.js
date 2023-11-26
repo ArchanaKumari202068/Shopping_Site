@@ -16,17 +16,19 @@ import { contextCreated } from "./components/useContext/Context";
 function App() {
   const location = useLocation();
   const user_id = useContext(contextCreated);
- 
 
   const authenticateUSer = async () => {
     const token = localStorage.getItem("jwt");
     if (token) {
       try {
-        const sendToken = await axios.post("http://localhost:5000/auth", {
-          token: localStorage.getItem("jwt"),
-        });
+        const sendToken = await axios.post(
+          `${process.env.REACT_APP_BACKEND_URL}/auth`,
+          {
+            token: localStorage.getItem("jwt"),
+          }
+        );
         console.log(sendToken.data.id);
-        user_id.setUser(sendToken.data.id)
+        user_id.setUser(sendToken.data.id);
         console.log(user_id.setUser(sendToken.data.id));
       } catch (error) {
         console.log("error in authentication", error);
@@ -42,7 +44,7 @@ function App() {
       <Navbar />
       <Routes>
         <Route path="/women" element={<Women />}></Route>
-        <Route path="/men" element={<Men/>}></Route>
+        <Route path="/men" element={<Men />}></Route>
         <Route path="/" element={<MainPage />}></Route>
         <Route path="/product/:id/" element={<ProductsDetails />}></Route>
         <Route path="/login" element={<Login />} />

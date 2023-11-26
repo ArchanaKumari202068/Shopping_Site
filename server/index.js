@@ -1,4 +1,3 @@
-
 const express = require("express");
 const {
   getAllProductDetails,
@@ -18,7 +17,10 @@ const {
   authenticateUser,
 } = require("./Controllers/User.js");
 // const {cartdata }= require("./Controllers/test.js");
-const {postProductByReviews,getProductByReviews} = require("./Controllers/Reviews.js")
+const {
+  postProductByReviews,
+  getProductByReviews,
+} = require("./Controllers/Reviews.js");
 const cors = require("cors");
 const dotenv = require("dotenv").config();
 const mongoose = require("mongoose");
@@ -27,14 +29,12 @@ const app = express();
 app.use(express.json());
 const port = 5000;
 // app.use(cors({
-//   origin:['http://localhost:3000','http://localhost:5000']
+//   origin:['http://localhost:3000','${process.env.REACT_APP_BACKEND_URL}']
 // }));
 app.use(cors());
-mongoose
-  .connect(process.env.MONGO_DB_URL)
-  .then(() => {
-    console.log("Connected to the database");
-  });
+mongoose.connect(process.env.MONGO_DB_URL).then(() => {
+  console.log("Connected to the database");
+});
 app.use(express.json());
 
 app.get("/ProductDetails", getAllProductDetails);
@@ -61,9 +61,8 @@ app.put("/cart/:id", deleteProductfromCart);
 app.get("/filter", getAllProductByCategories);
 //Reviews post reviews ,get reviews by productID,
 
-app.post("/reviews",postProductByReviews)
-app.get("/reviews/:id",getProductByReviews)
+app.post("/reviews", postProductByReviews);
+app.get("/reviews/:id", getProductByReviews);
 app.listen(port, () => {
   console.log(`Server is running on port ${port}`);
 });
-

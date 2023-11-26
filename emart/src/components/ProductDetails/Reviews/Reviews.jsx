@@ -12,9 +12,11 @@ const Reviews = (props) => {
   const [Reviews, setReviews] = useState();
   const { id } = useParams();
   const getReviewsOfProduct = async () => {
-    const getReviews = await axios.get(`http://localhost:5000/reviews/${id}`);
+    const getReviews = await axios.get(
+      `${process.env.REACT_APP_BACKEND_URL}/reviews/${id}`
+    );
     console.log("getReviews of the product", getReviews);
-    
+
     setgetAllReviews(getReviews.data);
   };
   const handleSubmitReviews = () => {
@@ -26,7 +28,7 @@ const Reviews = (props) => {
     const postReviews = async () => {
       try {
         const postReviewOfProduct = await axios.post(
-          "http://localhost:5000/reviews",
+          `${process.env.REACT_APP_BACKEND_URL}/reviews`,
           {
             product_id: id,
             user_id: userId.user,

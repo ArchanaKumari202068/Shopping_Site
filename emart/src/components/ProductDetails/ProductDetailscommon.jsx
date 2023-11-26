@@ -1,4 +1,4 @@
-import React, { useEffect, useState,useContext } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import "./ProductDetails.css";
 import Product2Img from "../assest/sports-shoe1-400x400.jpg";
 import Product3Img from "../assest/product-accessory2-400x400.jpg";
@@ -13,35 +13,34 @@ const ProductDetailscommon = (props) => {
   const [product, setProduct] = useState(true);
   const [showContainer, setshowContainer] = useState("description");
   const { id } = useParams();
-  const handleAddToCart = async () =>{
+  const handleAddToCart = async () => {
     if (checkUserLogin.user == null) {
       alert("login or signup");
       console.log(checkUserLogin.user);
     } else {
       try {
-        
         console.log("added to cart");
         const productdata = await axios.post(
-          `http://localhost:5000/cart/${checkUserLogin.user}`,
+          `${process.env.REACT_APP_BACKEND_URL}/cart/${checkUserLogin.user}`,
           {
             productId: id,
             quantity: 1,
           }
         );
         console.log(productdata);
-        alert("Added to cart")
+        alert("Added to cart");
       } catch (err) {
         console.log(err);
       }
     }
-    
-  }
-  
+  };
 
   const getProductDetailsById = async () => {
     try {
-      const productsDetails = await axios.get(`http://localhost:5000/ProductDetails/${id}`);
-      console.log("Fecthing Product Details",productsDetails)
+      const productsDetails = await axios.get(
+        `${process.env.REACT_APP_BACKEND_URL}/ProductDetails/${id}`
+      );
+      console.log("Fecthing Product Details", productsDetails);
       setProduct(productsDetails.data);
     } catch (err) {
       console.log(err);
@@ -50,8 +49,7 @@ const ProductDetailscommon = (props) => {
 
   // console.log("fetching the products detailsby the is",getProductDetailsById())
   useEffect(() => {
-    getProductDetailsById()
-   
+    getProductDetailsById();
   }, []);
   // const parameters = useParams();
   console.log(id);
@@ -83,12 +81,14 @@ const ProductDetailscommon = (props) => {
             <p>{product.product_about}</p>
             <div className="Product_details_btn">
               <button className="quntity">{product.product_quantity}</button>
-              <button onClick={handleAddToCart} className="cart_btn">ADD TO CART</button>
+              <button onClick={handleAddToCart} className="cart_btn">
+                ADD TO CART
+              </button>
             </div>
             <p>
               Categories: <a>{product.product_categories}</a>
             </p>
-            <p>Rating:{(product.product_Avgrating)?.toFixed(2) }</p>
+            <p>Rating:{product.product_Avgrating?.toFixed(2)}</p>
           </div>
         </div>
       </div>

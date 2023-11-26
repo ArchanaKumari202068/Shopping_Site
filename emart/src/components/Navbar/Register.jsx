@@ -21,19 +21,25 @@ const Register = () => {
 
     async function AuthenticateUser() {
       try {
-        const getToken = await axios.post("http://localhost:5000/SignUp", {
-          Name: name,
-          Password: password,
-          Email: email,
-        });
+        const getToken = await axios.post(
+          `${process.env.REACT_APP_BACKEND_URL}/SignUp`,
+          {
+            Name: name,
+            Password: password,
+            Email: email,
+          }
+        );
         // .then( (res) => {
         localStorage.setItem("jwt", getToken.data.token);
         console.log(getToken.data.user_id);
         // });
         console.log(getToken);
-        const sendToken = await axios.post("http://localhost:5000/auth", {
-          token: localStorage.getItem("jwt"),
-        });
+        const sendToken = await axios.post(
+          `${process.env.REACT_APP_BACKEND_URL}/auth`,
+          {
+            token: localStorage.getItem("jwt"),
+          }
+        );
 
         console.log(sendToken.data.id);
         console.log(userId.setUser(sendToken.data.id));

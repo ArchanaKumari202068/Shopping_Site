@@ -11,7 +11,7 @@ const Cartreuse = (props) => {
   const handleIncrement = async () => {
     setIncrement(increment + 1);
     const idOfProduct = await axios.post(
-      `http://localhost:5000/quantity/${id.user}`,
+      `${process.env.REACT_APP_BACKEND_URL}/quantity/${id.user}`,
       {
         prodId: props.productId,
         operation: "increment",
@@ -23,7 +23,7 @@ const Cartreuse = (props) => {
   const handleDecreament = async () => {
     setIncrement(increment - 1);
     const idOfProduct = await axios.post(
-      `http://localhost:5000/quantity/${id.user}`,
+      `${process.env.REACT_APP_BACKEND_URL}/quantity/${id.user}`,
       {
         prodId: props.productId,
         operation: "decrement",
@@ -36,7 +36,7 @@ const Cartreuse = (props) => {
     try {
         console.log(props.productId);
         const deleteProductFromCart = await axios.put(
-          `http://localhost:5000/cart/${id.user}`,
+          `${process.env.REACT_APP_BACKEND_URL}/cart/${id.user}`,
           {
             productId: props.productId,
           }

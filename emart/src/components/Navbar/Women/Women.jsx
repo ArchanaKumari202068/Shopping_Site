@@ -10,7 +10,9 @@ const Women = (props) => {
 
   const getProductOfWomen = async () => {
     const getProductByCategories = await axios.get(
-      `http://localhost:5000/filter?category=${props.men?"Men":'Women'}`
+      `${process.env.REACT_APP_BACKEND_URL}/filter?category=${
+        props.men ? "Men" : "Women"
+      }`
     );
     console.log(getProductByCategories.data);
     setWomens(getProductByCategories.data);
@@ -18,12 +20,14 @@ const Women = (props) => {
   };
   const getProductByprice = async (e) => {
     const getFilteredProductByPrice = await axios.get(
-      `http://localhost:5000/filter?category=${props.men?"Men":'Women'}&sortBy=${e.target.value}`
+      `${process.env.REACT_APP_BACKEND_URL}/filter?category=${
+        props.men ? "Men" : "Women"
+      }&sortBy=${e.target.value}`
     );
     console.log(getFilteredProductByPrice);
     setWomens(getFilteredProductByPrice.data);
     // const getFilteredProductByRating= await axios.get(
-    //   `http://localhost:5000/filter?category=Women&sortBy=${e.target.value}`
+    //   `${process.env.REACT_APP_BACKEND_URL}/filter?category=Women&sortBy=${e.target.value}`
     // );
     // console.log(getFilteredProductByRating);
     // setWomens(getFilteredProductByRating.data);
@@ -39,7 +43,7 @@ const Women = (props) => {
           <SideNavbar />
         </div>
         <div id="Women-product-header">
-          <h1>{props.men?"Men":"Women"}</h1>
+          <h1>{props.men ? "Men" : "Women"}</h1>
           <p>
             Nam nec tellus a odio tincidunt auctor a ornare odio. Sed non mauris
             vitae erat consequat auctor eu in elit. Class aptent taciti sociosqu
@@ -80,7 +84,7 @@ const Women = (props) => {
                   products_titles={product.product_details_title}
                   category={product.product_categories}
                   price={product.product_price}
-                  rating ={product.product_Avgrating}
+                  rating={product.product_Avgrating}
                 />
                 // </div>
               );

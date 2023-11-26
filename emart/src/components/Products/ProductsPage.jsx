@@ -17,9 +17,11 @@ import axios from "axios";
 const ProductsPage = () => {
   const [products, setProducts] = useState([]);
   useEffect(() => {
-    axios.get("http://localhost:5000/ProductDetails").then((res) => {
-      setProducts(res.data);
-    });
+    axios
+      .get(`${process.env.REACT_APP_BACKEND_URL}/ProductDetails`)
+      .then((res) => {
+        setProducts(res.data);
+      });
   }, []);
 
   return (
@@ -41,7 +43,7 @@ const ProductsPage = () => {
                   products_titles={product.product_details_title}
                   category={product.product_categories}
                   price={product.product_price}
-                  rating ={product.product_Avgrating}
+                  rating={product.product_Avgrating}
                 />
               </div>
             );
