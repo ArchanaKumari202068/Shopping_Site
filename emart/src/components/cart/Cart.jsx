@@ -56,6 +56,7 @@ const Cart = (props) => {
 
   useEffect(() => {
     getCartDetails();
+    
   }, [checkUser]);
 
   useEffect(() => {
@@ -74,11 +75,12 @@ const Cart = (props) => {
         </div>
         {items.map((ele) => {
           // return ele.product_details_title+" "
+          console.log(ele)
           return (
             <Cartreuse
               product_img={ele.product_img}
               products_titles={ele.product_details_title}
-              price={ele.product_price * ele.user_quantity}
+              price={ele.product_price}
               quantity={ele.user_quantity}
               productId={ele._id}
               getCartDetails={getCartDetails}

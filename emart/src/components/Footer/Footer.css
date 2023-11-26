@@ -103,7 +103,7 @@
     }
     .Footer_copywrite{
         display: flex;
-        flex-direction: column;
+        flex-direction: row;
     }
     .about {
         display: flex;

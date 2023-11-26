@@ -8,7 +8,7 @@ const User = require("../Models/UserSchema");
 //function to create a token
 const createToken = (id) => {
   console.log("Inside the token", id);
-  let x = jwt.sign({ id }, "zghgdmhkjs", {
+  let x = jwt.sign({ id }, process.env.SECRETE_KEY, {
     expiresIn: 120000,
   });
   console.log("Token: ", x);
@@ -100,7 +100,7 @@ const authenticateUser = (req, res) => {
   try {
     if (token) {
       // Verify the token using jwt.verify method
-      const decode = jwt.verify(token, "zghgdmhkjs");
+      const decode = jwt.verify(token, process.env.SECRETE_KEY);
       console.log(decode);
       res.send(decode);
     }

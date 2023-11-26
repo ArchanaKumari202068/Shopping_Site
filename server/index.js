@@ -20,7 +20,7 @@ const {
 // const {cartdata }= require("./Controllers/test.js");
 const {postProductByReviews,getProductByReviews} = require("./Controllers/Reviews.js")
 const cors = require("cors");
-const dotenv = require("dotenv");
+const dotenv = require("dotenv").config();
 const mongoose = require("mongoose");
 const Product = require("./Models/ProductSchema");
 const app = express();
@@ -31,9 +31,7 @@ const port = 5000;
 // }));
 app.use(cors());
 mongoose
-  .connect(
-    "mongodb+srv://Ishika123:Ishika123@cluster0.onpvdxd.mongodb.net/emart_database"
-  )
+  .connect(process.env.MONGO_DB_URL)
   .then(() => {
     console.log("Connected to the database");
   });

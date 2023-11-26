@@ -70,9 +70,9 @@ const Cartreuse = (props) => {
           </div>
         </div>
         <div id="ProductSummary">
-          <p>{props.price}</p>
+          <p>Price: {props.price*increment}</p>
           <p>Save for later</p>
-          <p onClick={handleDelete}>Remove</p>
+          <p onClick={handleDelete}>Remove </p>
         </div>
       </div>
     </>
