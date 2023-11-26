@@ -71,7 +71,6 @@ const Cart = (props) => {
     <>
       <div className="Cart_page">
         <div id="Cart_header">
-          <h1>{process.env.REACT_APP_BACKEND_URL}</h1>
           <h1>Cart</h1>
           <h2>TotalPrice:{totalprice}</h2>
         </div>
