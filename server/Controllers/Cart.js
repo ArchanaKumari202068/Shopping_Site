@@ -17,6 +17,7 @@ const AddToCart = async (req, res) => {
     // const updateData =await userData.updateOne({_id:userID},{$push:{cart:`${productID}`}})
     // res.send(findUserdetails.cart);
     var x = findUserdetails.cart;
+    console.log("findUserdetails",x)
     // console.log("productId");
     const cartItems = [];
     // console.log(cartItems)
@@ -55,7 +56,7 @@ const AddProductToCart = async (req, res) => {
       _id: userID,
     });
     const UserCart = UserDetails.cart;
-    console.log(UserCart);
+    console.log("User Caart->",UserCart);
     for (let i = 0; i < UserCart.length; i++) {
       if (UserDetails.cart[i].productId == productID) {
         console.log("already product in the cart");

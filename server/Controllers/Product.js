@@ -55,12 +55,13 @@ const IncreamentOrDecreament = async (req, res) => {
   }
 };
 
+//filter product by categories, pprice,rating,lateest
 const getAllProductByCategories = async (req, res) => {
   try {
     // const filterByPrice = req.query.price
     const categories = req.query.category;
     const priceGt = req.query.price_gt;
-    const reviews = req.query.reviews
+    const rating = req.query.rating;
     // const priceLt = req.query.price_lt
 
     console.log(req.query);
@@ -73,26 +74,30 @@ const getAllProductByCategories = async (req, res) => {
     if (priceGt) {
       filter.push({ product_price: { $gte: priceGt } });
     }
-    if (reviews){
-      filter.push({})
+    if (rating) {
+      filter.push({ rating: { $gte: rating } });
     }
-    const filterPrice = req.query.sortByPrice;
-    // const highToLow = req.query.sortByPrice
-    if (filterPrice == "highToLow") {
-      // sortBY[pricelh]
+
+    const sortByValue = req.query.sortBy;
+    if (sortByValue == "highToLowPrice") {
       sortBY["product_price"] = -1;
     }
-    if (filterPrice == "lowToHigh") {
+    if (sortByValue == "lowToHighPrice") {
       sortBY["product_price"] = 1;
     }
+    if (sortByValue == "hTolwRating") {
+      sortBY["product_Avgrating"] = -1;
+    }
+    if (sortByValue == "lwToHRating") {
+      sortBY["product_Avgrating"] = 1;
+    }
     console.log(sortBY);
-    console.log("Filters",filter)
+    console.log("Filters", filter);
     if (filter.length == 0) {
       const getAllProductByCategories = await Product.find().sort(sortBY);
 
       res.send(getAllProductByCategories);
     } else {
-     
       const getAllProductByCategories = await Product.find({
         // product_categories: categories,
         // product_price:{$gte:priceGt},

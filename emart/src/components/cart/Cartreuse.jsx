@@ -6,7 +6,7 @@ import { contextCreated } from "../useContext/Context";
 
 const Cartreuse = (props) => {
   var id = useContext(contextCreated);
-  console.log("userId", id.user);
+  // console.log("userId", id.user);
   var [increment, setIncrement] = useState(props.quantity);
   const handleIncrement = async () => {
     setIncrement(increment + 1);

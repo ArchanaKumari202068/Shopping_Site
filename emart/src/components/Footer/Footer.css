@@ -4,7 +4,7 @@
     /* border: 2px solid blue; */
     display: flex;
     flex-direction: row;
-    justify-content: space-evenly;
+    justify-content: space-between;
     padding: 10%;
    
 }
@@ -26,6 +26,11 @@
     margin: 0;
     width: 100%;
 }
+#for_her_him_both{
+    display: flex;
+    flex-direction: row;
+    width: 40%;
+}
 .For_her{  
     flex: 1;
 }
@@ -44,7 +49,7 @@
     flex: 1;
     display: flex;
     flex-direction: column;
-    gap: 2em;
+    gap: 1.2em;
 }
 .For_Him li{
     list-style: none;
@@ -66,7 +71,7 @@
 }
 
 .Footer_copywrite{
-    height: 10vh;
+    height: 3%;
     width: 100%;
     display: flex;
     flex-direction: row;
@@ -74,8 +79,8 @@
     padding: 1em 3em 1em 8em;
     box-shadow: 0px 0px 0px 1px rgba(0,0,0,0.1);
 }
-.Copyright{
-    width: 20%;
+.Copyright p{
+    width: 100%;
 }
 .footer_icons{
     width: 30%;
@@ -88,4 +93,31 @@
     width: 50px;
     gap: 2em;
     font-size: 1.5em;
+}
+@media (max-width: 600px){
+    .Footer{
+        display: flex;
+        flex-direction: column;
+        gap: 2em;
+       
+    }
+    .Footer_copywrite{
+        display: flex;
+        flex-direction: column;
+    }
+    .about {
+        display: flex;
+        flex-direction: row;
+    }
+    .about h3{
+        font-size: 18px;
+    }
+    .about img{
+        height: 45px;
+        width: 55px;
+    }
+    #for_her_him_both{
+        display: flex;
+        flex-direction: row;
+    }
 }

@@ -3,8 +3,9 @@
     width: 100%;
     display: flex;
     flex-direction: row;
-    margin: 3% 4% 2% 5%;
+    /* margin: 3% 4% 2% 5%; */
     gap: 2em;
+    padding: 2%;
 
 }
 #women-sideNavbar{
@@ -13,8 +14,9 @@
 }
 #Women-product-header{
     /* height: 100%; */
+    height: fit-content;
     width: 70%;
-    border:2px solid blue;
+    box-shadow: 0 0 0 1px rgba(0,0,0,0.1);
     padding: 7%;
 }
 #getAllWomensProduct{
@@ -29,11 +31,32 @@
 #productDetails{
     height: 3em;
     width: 5em;
-    border: 2px solid red;
+    box-shadow: 0 0 0 1px rgba(0,0,0,0.1);
     background-size: cover;
 }
 #filteredResult{
     display: flex;
     flex-direction: row;
     justify-content: space-between;
+}
+@media (max-width: 790px){
+    #women{
+        display: flex;
+        flex-direction: column;
+    }
+    #women-sideNavbar{
+        width: 100%;
+    }
+    #Women-product-header{
+        width: 100%;
+    }
+    #for_her_him_both{
+       width: 100%;
+       justify-content: space-evenly;
+    }
+    #getAllWomensProduct{
+        justify-content: space-evenly;
+    }
+
+
 }

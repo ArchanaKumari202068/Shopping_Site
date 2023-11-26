@@ -3,10 +3,11 @@
     height: 100%;
     display: flex;
     flex-direction: row;
+    flex-wrap: wrap;
     gap: 4em;
     justify-content: center;
     position: relative;
-    padding: 10em 10em 7em 10em;
+    padding: 5em;
     
 }
 
@@ -15,7 +16,8 @@
     width: 373px;
     color: #ffffff;
     position: relative;
-    background: rgba(0, 0, 0, 0.8) ;
+    box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.1);
+
  
     
 }
@@ -34,9 +36,9 @@
     bottom: 0;
     left: 0;
     text-align: left;
-    border: 2px solid black;
     height: 100%;
     width: 100%;
+  
     background-color: rgba(0, 0, 0, 0.6);
     display: flex;
     flex-direction: column;
@@ -45,10 +47,12 @@
     padding: 10%;
 }
 .card_content_btn{
-    height: 6vh;
-    width: auto;
+    height: 47px;
+    width: 130px;
     color: black;
     font-size: 1rem;
+    border: none;
+    border-radius: 5px;
     font-family: sans-serif;
     background-color: #ffffff;
 }

@@ -5,12 +5,12 @@ import { Link } from "react-router-dom";
 import axios from "axios";
 import ProductCards from "../../Products/ProductCards.jsx";
 
-const Women = () => {
+const Women = (props) => {
   const [womens, setWomens] = useState([]);
 
   const getProductOfWomen = async () => {
     const getProductByCategories = await axios.get(
-      "http://localhost:5000/filter?category=Women"
+      `http://localhost:5000/filter?category=${props.men?"Men":'Women'}`
     );
     console.log(getProductByCategories.data);
     setWomens(getProductByCategories.data);
@@ -18,10 +18,15 @@ const Women = () => {
   };
   const getProductByprice = async (e) => {
     const getFilteredProductByPrice = await axios.get(
-      `http://localhost:5000/filter?category=Women&sortByPrice=${e.target.value}`
+      `http://localhost:5000/filter?category=${props.men?"Men":'Women'}&sortBy=${e.target.value}`
     );
-    console.log(getFilteredProductByPrice)
-    setWomens(getFilteredProductByPrice.data)
+    console.log(getFilteredProductByPrice);
+    setWomens(getFilteredProductByPrice.data);
+    // const getFilteredProductByRating= await axios.get(
+    //   `http://localhost:5000/filter?category=Women&sortBy=${e.target.value}`
+    // );
+    // console.log(getFilteredProductByRating);
+    // setWomens(getFilteredProductByRating.data);
   };
 
   useEffect(() => {
@@ -34,10 +39,7 @@ const Women = () => {
           <SideNavbar />
         </div>
         <div id="Women-product-header">
-          <nav>
-            <Link>Home</Link>
-          </nav>
-          <h1>Women</h1>
+          <h1>{props.men?"Men":"Women"}</h1>
           <p>
             Nam nec tellus a odio tincidunt auctor a ornare odio. Sed non mauris
             vitae erat consequat auctor eu in elit. Class aptent taciti sociosqu
@@ -52,9 +54,18 @@ const Women = () => {
                 <option>Default Sorting</option>
                 <option value={"pop"}>sort by popularity</option>
                 <option value={"lat"}>sort by latest</option>
-                <option value={"lat"}>sort by Rating</option>
-                <option value={"lowToHigh"}>sort by price: low to high</option>
-                <option value={"highToLow"}>sort by price: high to low</option>
+                <option value={"lwToHRating"}>
+                  sort by Rating:low to high
+                </option>
+                <option value={"hTolwRating"}>
+                  sort by Rating:high to low
+                </option>
+                <option value={"lowToHighPrice"}>
+                  sort by price: low to high
+                </option>
+                <option value={"highToLowPrice"}>
+                  sort by price: high to low
+                </option>
               </select>
             </div>
           </div>
@@ -69,6 +80,7 @@ const Women = () => {
                   products_titles={product.product_details_title}
                   category={product.product_categories}
                   price={product.product_price}
+                  rating ={product.product_Avgrating}
                 />
                 // </div>
               );

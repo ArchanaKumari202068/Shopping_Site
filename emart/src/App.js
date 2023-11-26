@@ -1,4 +1,4 @@
-import Navbar1 from "./components/Navbar/Navbar1";
+import Navbar from "./components/Navbar/Navbar";
 import MainPage from "./components/MainPage";
 import Footer from "../src/components/Footer/Footer";
 import { BrowserRouter, Route, Routes, useLocation } from "react-router-dom";
@@ -7,7 +7,7 @@ import Login from "./components/Navbar/Login";
 import Register from "./components/Navbar/Register";
 import Cart from "./components/cart/Cart";
 import "./App.css";
-
+import Men from "./components/Navbar/Men/Men";
 import Women from "./components/Navbar/Women/Women";
 import axios from "axios";
 import { useContext, useEffect } from "react";
@@ -26,6 +26,7 @@ function App() {
           token: localStorage.getItem("jwt"),
         });
         console.log(sendToken.data.id);
+        user_id.setUser(sendToken.data.id)
         console.log(user_id.setUser(sendToken.data.id));
       } catch (error) {
         console.log("error in authentication", error);
@@ -38,9 +39,10 @@ function App() {
 
   return (
     <>
-      <Navbar1 />
+      <Navbar />
       <Routes>
         <Route path="/women" element={<Women />}></Route>
+        <Route path="/men" element={<Men/>}></Route>
         <Route path="/" element={<MainPage />}></Route>
         <Route path="/product/:id/" element={<ProductsDetails />}></Route>
         <Route path="/login" element={<Login />} />

@@ -1,8 +1,13 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import "./sideNavbar.css";
+import BestSellerimg1 from "../assest/product-accessory1-400x400.jpg"
+import BestSellerimg2 from "../assest/product-accessory2-400x400.jpg"
+import BestSellerimg3 from "../assest/product-bag1-400x400.jpg"
+import BestSellerimg4 from "../assest/product-w-jeans2-400x400.jpg"
 import ProductCards from "../Products/ProductCards";
 const SideNavbar = (props) => {
+  
   return (
     <div id="SideNavbar">
       {/* <h1>Women</h1> */}
@@ -54,17 +59,14 @@ const SideNavbar = (props) => {
       <div id="bestSeller">
         <h2>Our Best Sellers</h2>
         <div id="bestSellerProducts">
-          <ul>
-            <li>
             <ProductCards
                   id={props._id}
-                  product_img={props.product_img}
-                  products_titles={props.product_details_title}
-                  category={props.product_categories}
-                  price={props.product_price}
+                  product_img={BestSellerimg1}
+                  products_titles={"Boho Bangle Bracelet"}
+                  // category={props.product_categories}
+                  price={500}
+                  showColors={false}
                 />
-            </li>
-          </ul>
         </div>
       </div>
     </div>

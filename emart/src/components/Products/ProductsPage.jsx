@@ -18,7 +18,6 @@ const ProductsPage = () => {
   const [products, setProducts] = useState([]);
   useEffect(() => {
     axios.get("http://localhost:5000/ProductDetails").then((res) => {
-
       setProducts(res.data);
     });
   }, []);
@@ -42,6 +41,7 @@ const ProductsPage = () => {
                   products_titles={product.product_details_title}
                   category={product.product_categories}
                   price={product.product_price}
+                  rating ={product.product_Avgrating}
                 />
               </div>
             );

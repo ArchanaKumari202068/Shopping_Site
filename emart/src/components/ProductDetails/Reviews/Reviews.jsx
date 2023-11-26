@@ -4,7 +4,8 @@ import { contextCreated } from "../../useContext/Context";
 import { useParams } from "react-router-dom";
 import axios from "axios";
 import CardReviews from "./CardReviews.jsx";
-const Reviews = () => {
+import ProductDetailscommon from "../ProductDetailscommon.jsx";
+const Reviews = (props) => {
   const [getAllReviews, setgetAllReviews] = useState([]);
   const userId = useContext(contextCreated);
   const [Rating, setRating] = useState();
@@ -13,6 +14,7 @@ const Reviews = () => {
   const getReviewsOfProduct = async () => {
     const getReviews = await axios.get(`http://localhost:5000/reviews/${id}`);
     console.log("getReviews of the product", getReviews);
+    
     setgetAllReviews(getReviews.data);
   };
   const handleSubmitReviews = () => {
@@ -35,6 +37,7 @@ const Reviews = () => {
         );
         getReviewsOfProduct();
         console.log("Reviews data posted", postReviewOfProduct);
+        props.getProductDetailsById();
       } catch (error) {
         console.log(error, "error in posting the date");
       }
@@ -44,6 +47,7 @@ const Reviews = () => {
   useEffect(() => {
     try {
       getReviewsOfProduct();
+
       // postReviews()
     } catch (err) {
       console.log("Error in posting the Reviews");
@@ -58,7 +62,7 @@ const Reviews = () => {
           {getAllReviews.map((ele) => {
             return (
               <CardReviews
-                userName="Archana"
+                userName={ele.UserId[0].Name}
                 rating={ele.rating}
                 reviews={ele.reviews}
                 reviews_posted_date={ele.postedOn}
