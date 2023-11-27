@@ -36,7 +36,6 @@ const Cart = (props) => {
         `${process.env.REACT_APP_BACKEND_URL}/cart/${checkUser.user}`
       );
 
-
       // console.log("id.data", id.data);
       var x = id.data;
       console.log(x);
@@ -57,7 +56,6 @@ const Cart = (props) => {
 
   useEffect(() => {
     getCartDetails();
-    
   }, [checkUser]);
 
   useEffect(() => {
@@ -70,24 +68,55 @@ const Cart = (props) => {
   return (
     <>
       <div className="Cart_page">
-        <div id="Cart_header">
-          <h1>Cart</h1>
-          <h2>TotalPrice:{totalprice}</h2>
+        <div id="Card_container">
+          <div id="Cart_header">
+            <h1> My Cart</h1>
+            {/* <h2>TotalPrice:{totalprice}</h2> */}
+          </div>
+          {items.map((ele) => {
+            // return ele.product_details_title+" "
+            console.log(ele);
+            return (
+              <div id="cartreuse_container">
+                <Cartreuse
+                  product_img={ele.product_img}
+                  product_title={ele.product_details_title}
+                  price={ele.product_price}
+                  quantity={ele.user_quantity}
+                  productId={ele._id}
+                  getCartDetails={getCartDetails}
+                  setTotalPrice={setTotalPrice}
+                />
+              </div>
+            );
+          })}
+          <div id="cart_footer">
+            <div id="cart_total_price">
+              <p>TotalPrice:</p>
+            </div>
+            <div id="cart_price_details">
+              <button>${totalprice}</button>
+            </div>
+          </div>
         </div>
-        {items.map((ele) => {
-          // return ele.product_details_title+" "
-          console.log(ele)
-          return (
-            <Cartreuse
-              product_img={ele.product_img}
-              products_titles={ele.product_details_title}
-              price={ele.product_price}
-              quantity={ele.user_quantity}
-              productId={ele._id}
-              getCartDetails={getCartDetails}
-            />
-          );
-        })}
+        <div id="card_checkout">
+          <div id="chechout_header">
+            <p>Cart Totals</p>
+          </div>
+          <div id="checkout_content">
+            <div className="checkout_price_div">
+              <p>SubTotal: </p>
+              <p>${totalprice}</p>
+            </div>
+            <div className="checkout_price_div">
+              <p>Total: </p>
+              <p>${totalprice}</p>
+            </div>
+          </div>
+          <div id="checkout_btn">
+            <button>Checkout</button>
+          </div>
+        </div>
       </div>
     </>
   );

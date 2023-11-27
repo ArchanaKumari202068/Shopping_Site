@@ -28,6 +28,7 @@ const ProductCards = (props) => {
             quantity: 1,
           }
         );
+        alert("Added to Cart")
         console.log(productdata);
       } catch (err) {
         console.log(err);
