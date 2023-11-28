@@ -21,11 +21,16 @@ const {
   postProductByReviews,
   getProductByReviews,
 } = require("./Controllers/Reviews.js");
+
+const {createCheckout} = require("./Controllers/Payment.js")
 const cors = require("cors");
 const dotenv = require("dotenv").config();
 const mongoose = require("mongoose");
 const Product = require("./Models/ProductSchema");
 const app = express();
+
+//import stripe
+
 app.use(express.json());
 const port = 5000;
 // app.use(cors({
@@ -63,6 +68,10 @@ app.get("/filter", getAllProductByCategories);
 
 app.post("/reviews", postProductByReviews);
 app.get("/reviews/:id", getProductByReviews);
+
+app.post('/create-checkout-session',createCheckout)
+
+
 app.listen(port, () => {
   console.log(`Server is running on port ${port}`);
 });

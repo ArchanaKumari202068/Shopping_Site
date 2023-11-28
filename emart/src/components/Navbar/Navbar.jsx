@@ -25,7 +25,7 @@ const Navbar = () => {
     <>
       <div id="Navbar_main_container">
         <div id="Mobile_view">
-          {bars ? (
+          {!bars ? (
             <div id="bars" onClick={handlemenuBar}>
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -81,7 +81,7 @@ const Navbar = () => {
 
         <div
           id="nav_menu_container"
-          className={`nav_menu_container ${!bars ? "show" : ""}`}
+          className={`nav_menu_container ${!bars ? "" : "show"}`}
         >
           <div id="img_logo">
             <img src={navLogo} />
@@ -89,16 +89,16 @@ const Navbar = () => {
           <div id="nav_items">
             <ul>
               <li>
-                <Link to="/">Home</Link>
+                <Link to="/" onClick={handlemenuBar}>Home</Link>
               </li>
               {/* <li>
                 <Link to="/">Products</Link>
               </li> */}
               <li>
-                <Link to="/women">Women</Link>
+                <Link to="/women" onClick={handlemenuBar}>Women</Link>
               </li>
               <li>
-                <Link to="/men">Men</Link>
+                <Link to="/men" onClick={handlemenuBar}>Men</Link>
               </li>
               {/* <li>
                 <Link to="/">About</Link>

@@ -93,7 +93,7 @@ const ProductDetailscommon = (props) => {
         </div>
       </div>
       <div className="sub-section">
-        <div className="btns">
+        <div className="btns_Reviews_description">
           <button
             onClick={() => {
               setshowContainer("description");

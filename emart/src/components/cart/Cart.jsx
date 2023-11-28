@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useContext } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import "./Cart.css";
 import Cartreuse from "./Cartreuse";
 import axios from "axios";
@@ -28,6 +28,21 @@ const Cart = (props) => {
     console.log("total price", totalPriceOfCardProduct);
     setTotalPrice(totalPriceOfCardProduct);
   };
+  const handlecheckout =async() =>{
+   try {
+     const res = await axios.post(`http://localhost:5000/create-checkout-session/`,{
+       id:checkUser.user
+     })
+     console.log(res.data.url)
+     window.location.replace(res.data.url);
+    //  navigate(res.data.url)
+   } catch (error) {
+    console.log(error)
+    
+   }
+
+  }
+
 
   async function getCartDetails() {
     try {
@@ -114,7 +129,10 @@ const Cart = (props) => {
             </div>
           </div>
           <div id="checkout_btn">
-            <button>Checkout</button>
+            {/* <Link to="/checkout"> */}
+
+            <button onClick={handlecheckout}>Checkout</button>
+            {/* </Link> */}
           </div>
         </div>
       </div>

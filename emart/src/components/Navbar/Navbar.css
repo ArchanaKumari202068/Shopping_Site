@@ -116,7 +116,11 @@
 #nav_contact_icon{
    display: none;
 }
-
+#btn_SignOut{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
 @media (max-width: 990px) {
     #nav_items ul {
         display: flex;
@@ -166,6 +170,9 @@
         right: 0; 
         color: #ffff;
         margin: 1.2% 3%;
+        background-color: #0d0e0f95 ;
+
+        border-radius: 5px;
     }
     #x_icons{
         display: block;

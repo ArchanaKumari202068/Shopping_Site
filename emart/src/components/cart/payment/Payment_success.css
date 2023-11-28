@@ -1,0 +1,88 @@
+#Payment_page {
+    width: 100%;
+    height: 90vh;
+    background-color: #f6f6f6;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10%;
+    text-align: center;
+
+}
+
+#Payment_page_container {
+    width: 40%;
+    height: 500px;
+    display: flex;
+    background-color: #ffffff;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    padding: 5%;
+}
+
+#Payment_gif {
+    width: 10em;
+    height: 10em;
+
+}
+
+#Payment_gif img {
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+    border-radius: 60%;
+
+}
+
+#Payment_success_content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+#Thank_you h1 {
+    color: #499bda;
+    font-size: 3rem;
+    font-weight: 800;
+
+}
+
+#Thank_you p {
+    color: rgb(0, 0, 0);
+    font-size: 1rem;
+    font-weight: 600;
+}
+
+#payment_success_msg {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#payment_success_msg p {
+    font-size: 0.8rem;
+    color: #c3c3c3;
+    font-weight: 400;
+    display: flex;
+    align-items: center;
+}
+
+#payment_success_msg button {
+    width: 10em;
+    height: 3em;
+    font-size: 1.3em;
+    color: #ffff;
+    background-color:#499bda ;
+    border: none;
+    border-radius: 5px;
+
+}
+
+#payment_success_msg button:hover {
+    background-color: #499bda;
+    /* font-size: 1.5em; */
+}

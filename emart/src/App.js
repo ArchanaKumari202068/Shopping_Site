@@ -12,6 +12,8 @@ import Women from "./components/Navbar/Women/Women";
 import axios from "axios";
 import { useContext, useEffect } from "react";
 import { contextCreated } from "./components/useContext/Context";
+import ShippingForm from "./components/Order/Shipping_page";
+import PaymentSuccessful from "./components/cart/payment/PaymentSuccessful";
 
 function App() {
   const location = useLocation();
@@ -50,6 +52,9 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
         <Route path="/cart" element={<Cart />} />
+        <Route path="/checkout" element={<ShippingForm />} />
+        <Route path="/payment_successfull" element={<PaymentSuccessful />} />
+
       </Routes>
       <Footer />
     </>

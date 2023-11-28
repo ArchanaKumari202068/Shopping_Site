@@ -45,7 +45,8 @@ const AddToCart = async (req, res) => {
     res.status(500).send({ message: "Internal Server Error" });
   }
 };
-const AddProductToCart = async (req, res) => {
+const 
+AddProductToCart = async (req, res) => {
   try {
     const userID = req.params.id;
     console.log("AddProductToCart", userID);
