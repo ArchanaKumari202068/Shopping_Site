@@ -39,21 +39,21 @@ const Cart = (props) => {
     setTotalPrice(totalPriceOfCardProduct);
   };
 
-  const handlecheckout = async () => {
-    try {
-      const res = await axios.post(
-        `${process.env.REACT_APP_BACKEND_URL}/create-checkout-session/`,
-        {
-          id: checkUser.user,
-        }
-      );
-      console.log(res.data.url);
-      window.location.replace(res.data.url);
-      //  navigate(res.data.url)
-    } catch (error) {
-      console.log(error);
-    }
-  };
+  // const handlecheckout = async () => {
+  //   try {
+  //     const res = await axios.post(
+  //       `${process.env.REACT_APP_BACKEND_URL}/create-checkout-session/`,
+  //       {
+  //         id: checkUser.user,
+  //       }
+  //     );
+  //     console.log(res.data.url);
+  //     window.location.replace(res.data.url);
+  //     //  navigate(res.data.url)
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // };
 
   // async function getCartDetails() {
   //   try {
@@ -141,10 +141,10 @@ const Cart = (props) => {
             </div>
           </div>
           <div id="checkout_btn">
-            {/* <Link to="/checkout"> */}
+            <Link to="/checkout">
 
-            <button onClick={handlecheckout}>Checkout</button>
-            {/* </Link> */}
+            <button >Checkout</button>
+            </Link>
           </div>
         </div>
       </div>

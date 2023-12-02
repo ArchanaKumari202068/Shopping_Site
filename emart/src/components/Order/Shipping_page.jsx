@@ -1,6 +1,9 @@
-import React, { useState } from "react";
+import React, { useState,useContext } from "react";
+// import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import Global_delivery from "../assest/Global_delivery.gif";
 import "./shipping.css";
-
+import axios from "axios";
+import { contextCreated } from "../useContext/Context";
 const countries = [
   "Select Country",
   "United States",
@@ -10,29 +13,63 @@ const countries = [
   "France",
   "India",
   "Australia",
-  // Add more countries as needed
+];
+
+const states = [
+  "Select State",
+  "Andhra Pradesh",
+  "Arunachal Pradesh",
+  "Assam",
+  "Bihar",
+  "Chhattisgarh",
+  "Goa",
+  "Gujarat",
+  "Haryana",
+  "Himachal Pradesh",
+  "Jharkhand",
+  "Karnataka",
+  "Kerala",
+  "Madhya Pradesh",
+  "Maharashtra",
+  "Manipur",
+  "Meghalaya",
+  "Mizoram",
+  "Nagaland",
+  "Odisha",
+  "Punjab",
+  "Rajasthan",
+  "Sikkim",
+  "Tamil Nadu",
+  "Telangana",
+  "Tripura",
+  "Uttar Pradesh",
+  "Uttarakhand",
+  "West Bengal"
 ];
 
 const ShippingForm = () => {
+  const [email, setEmail] = useState("");
+  const [emailError, setEmailError] = useState("");
+  const [password, setPassword] = useState("");
+ 
+
   const [formData, setFormData] = useState({
-    firstName: "",
-    lastName: "",
+    name: "",
     country: "Select Country",
     streetAddress: "",
     townCity: "",
-    state: "",
+    states: "",
     pincode: "",
     phone: "",
     email: "",
   });
 
   const [formErrors, setFormErrors] = useState({
-    firstName: "",
-    lastName: "",
+    name: "",
     country: "",
     streetAddress: "",
     townCity: "",
-    state: "",
+    states: "",
     pincode: "",
     phone: "",
     email: "",
@@ -51,19 +88,29 @@ const ShippingForm = () => {
       [name]: "",
     });
   };
+  const validateEmail = () => {
+    //condition for valid email
+    const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!email) {
+      setFormErrors({...formErrors,email:"Please enter an email address"});
+    } else if (!email.match(emailPattern)) {
+      setFormErrors("Please enter a valid email address.");
+    } else {
+      setFormErrors("");
+    }
+  };
+  // const handleEmailChange = (event) => {
+  //   setEmail(event.target.value);
+  //   setEmailError(""); // Reset error when user edits email
+  // };
 
   const validateForm = () => {
     let isValid = true;
     const newErrors = { ...formErrors };
 
     // Example validation (you can add more complex validation logic)
-    if (formData.firstName.trim() === "") {
-      newErrors.firstName = "First Name is required";
-      isValid = false;
-    }
-
-    if (formData.lastName.trim() === "") {
-      newErrors.lastName = "Last Name is required";
+    if (formData.name.trim() === "") {
+      newErrors.name = "Name is required";
       isValid = false;
     }
 
@@ -82,17 +129,17 @@ const ShippingForm = () => {
       isValid = false;
     }
 
-    if (formData.state.trim() === "") {
-      newErrors.state = "State is required";
+    if (formData.states.trim() === "") {
+      newErrors.states = "State is required";
       isValid = false;
     }
 
-    if (formData.pincode.trim() === "") {
+    if (formData.pincode?.trim() === "") {
       newErrors.pincode = "Pincode is required";
       isValid = false;
     }
 
-    if (formData.phone.trim() === "") {
+    if (formData.phone?.trim() === "") {
       newErrors.phone = "Phone is required";
       isValid = false;
     }
@@ -106,135 +153,161 @@ const ShippingForm = () => {
     return isValid;
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-
-    if (validateForm()) {
-      // Process form data if the form is valid
-      console.log("Form submitted with data:", formData);
-    } else {
-      alert("Form has validation errors. Please correct them or make sure each field is filled");
-    }
+ 
+  const handlePasswordChange = (event) => {
+    setPassword(event.target.value);
+    setFormErrors(""); // Reset error when user edits password
+  };
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    validateEmail();
+    validateForm()
+   
+    //Onsubmit console email and password
+    console.log(email);
+    console.log(password);
   };
 
+  const checkUser = useContext(contextCreated);
+
+  const handlecheckout = async () => {
+    try {
+      console.log(checkUser.user)
+      const res = await axios.post(
+        `${process.env.REACT_APP_BACKEND_URL}/create-checkout-session/`,
+        {
+          id: checkUser.user,
+        }
+      );
+      console.log(res.data.url);
+      window.location.replace(res.data.url);
+      //  navigate(res.data.url)
+    } catch (error) {
+      console.log(error);
+    }
+  };
+// 
   return (
-    <form className="shipping_form" onSubmit={handleSubmit}>
-      <label>
-        First Name:
-        <input
-          type="text"
-          name="firstName"
-          value={formData.firstName}
-          onChange={handleInputChange}
-          
-        />
-        <span className="error">{formErrors.firstName}</span>
-      </label>
-      <br />
-      <label>
-        Last Name:
-        <input
-          type="text"
-          name="lastName"
-          value={formData.lastName}
-          onChange={handleInputChange}
-          
-        />
-        <span className="error">{formErrors.lastName}</span>
-      </label>
-      <br />
-      <label>
-        Country:
-        <select
-          name="country"
-          value={formData.country}
-          onChange={handleInputChange}
-          
-        >
-          {countries.map((country, index) => (
-            <option key={index} value={country}>
-              {country}
-            </option>
-          ))}
-        </select>
-        <span className="error">{formErrors.country}</span>
-      </label>
-      <br />
-      <label>
-        Street Address:
-        <input
-          type="text"
-          name="streetAddress"
-          value={formData.streetAddress}
-          onChange={handleInputChange}
-          
-        />
-        <span className="error">{formErrors.streetAddress}</span>
-      </label>
-      <br />
-      <label>
-        Town/City:
-        <input
-          type="text"
-          name="townCity"
-          value={formData.townCity}
-          onChange={handleInputChange}
-          
-        />
-        <span className="error">{formErrors.townCity}</span>
-      </label>
-      <br />
-      <label>
-        State:
-        <input
-          type="text"
-          name="state"
-          value={formData.state}
-          onChange={handleInputChange}
-          
-        />
-        <span className="error">{formErrors.state}</span>
-      </label>
-      <br />
-      <label>
-        Pincode:
-        <input
-          type="text"
-          name="pincode"
-          value={formData.pincode}
-          onChange={handleInputChange}
-          
-        />
-        <span className="error">{formErrors.pincode}</span>
-      </label>
-      <br />
-      <label>
-        Phone:
-        <input
-          type="tel"
-          name="phone"
-          value={formData.phone}
-          onChange={handleInputChange}
-          
-        />
-        <span className="error">{formErrors.phone}</span>
-      </label>
-      <br />
-      <label>
-        Email:
-        <input
-          type="email"
-          name="email"
-          value={formData.email}
-          onChange={handleInputChange}
-          
-        />
-        <span className="error">{formErrors.email}</span>
-      </label>
-      <br />
-      <button type="submit">Submit</button>
-    </form>
+    <>
+      <div className="main_shipping_page">
+        <div className="shipping_img">
+          <img src={Global_delivery} />
+        </div>
+        <div className="shipping_part">
+          <form onSubmit={handleSubmit}>
+            <div className="shipping_form">
+              <h1>Shipping</h1>
+              
+                <input
+                  type="text"
+                  name="name"
+                  value={formData.firstName}
+                  onChange={handleInputChange}
+                  placeholder="Your Name"
+                />    
+                   {formErrors.name && <p style={{ color: "red" }}>{formErrors.name}</p>}       
+                <input
+                  type="text"
+                  placeholder="Email "
+                  value={formData.email}
+                  name="email"
+                  onChange={handleInputChange}
+                  />
+                  {formErrors.email && <p style={{ color: "red" }}>{formErrors.email}</p>}
+              
+              <select
+                name="country"
+                value={formData.country}
+                onChange={handleInputChange}
+              >
+                {countries.map((country, index) => (
+                  <option key={index} value={country}>
+                    {country}
+                  </option>
+                ))}
+              </select>
+              {formErrors.country && <p style={{ color: "red" }}>{formErrors.country}</p>}
+
+              {/* state */}
+              <select
+                name="states"
+                value={formData.states}
+                onChange={handleInputChange}
+              >
+                {states.map((states, index) => (
+                  <option key={index} value={states}>
+                    {states}
+                  </option>
+                ))}
+              </select>
+              {formErrors.states && <p style={{ color: "red" }}>{formErrors.states}</p>}
+
+              
+              <input
+                type="text"
+                name="townCity"
+                placeholder="City Name"
+                value={formData.townCity}
+                onChange={handleInputChange}
+              />
+              {formErrors.townCity && <p style={{ color: "red" }}>{formErrors.townCity}</p>}
+            
+
+              
+              <input
+                type="text"
+                name="streetAddress"
+                placeholder="Address1 for shipping"
+                value={formData.streetAddress}
+                onChange={handleInputChange}
+              />
+               {formErrors.streetAddress && <p style={{ color: "red" }}>{formErrors.streetAddress}</p>}
+              
+              
+              <input
+                type="text"
+                name="streetAddress"
+                placeholder="Address2 for shipping"
+                value={formData.streetAddress}
+                onChange={handleInputChange}
+              />
+               {formErrors.streetAddress && <p style={{ color: "red" }}>{formErrors.streetAddress}</p>}
+               
+              <input
+                type="Number"
+                name="pincode"
+                placeholder="Pincode"
+                value={formData.pincode}
+                onChange={handleInputChange}
+              />
+               {formErrors.pincode && <p style={{ color: "red" }}>{formErrors.pincode}</p>}
+    
+              <input
+                type="tel"
+                name="phone"
+                placeholder="Phone Number"
+                value={formData.phone}
+                onChange={handleInputChange}
+                pattern="[0-9]{10}"
+              />
+               {formErrors.phone && <p style={{ color: "red" }}>{formErrors.phone}</p>}
+            
+              <button type="submit" className="shipping-btn" onClick={handlecheckout}>
+                Shipping
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </>
   );
 };
 
 export default ShippingForm;
+
+// const ShippingForm = ()=>{
+//   return <h1>Hello</h1>
+
+// }
+
+// export default ShippingForm;
