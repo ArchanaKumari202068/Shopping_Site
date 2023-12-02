@@ -90,15 +90,18 @@ const Login = () => {
                       IsSignInWithGoogle:true
                     }
                   );
-                  console.log(loginwithGoogle.data.logintoken)
-                  localStorage.setItem("jwt", loginwithGoogle.data.logintoken);
-                  navigate('/')
-
+                  
+                  if (loginwithGoogle.status ==200) {
+                    console.log(loginwithGoogle.data.logintoken)
+                    localStorage.setItem("jwt", loginwithGoogle.data.logintoken);
+                    navigate('/')
+                  } else {
+                    alert("Do not have account,Please create account")
+                    navigate('/register')
+                  }
 
                 }}
                 onError={() => {
-                  alert("Do not have account,Please create account")
-                  navigate('/register')
                   console.log("Login Failed");
                 }}
               />
