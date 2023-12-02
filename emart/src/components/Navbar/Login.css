@@ -108,8 +108,13 @@ button:hover {
     .main_login_page{
         display: flex;
         flex-direction: column;
+        align-items: center;
     }
     #Login_img {
         display: none;
+    }
+    #Login_form_container{
+        width: 100%;
+        align-items: center;
     }
 }
