@@ -97,6 +97,8 @@ const Login = () => {
 
                 }}
                 onError={() => {
+                  alert("Do not have account,Please create account")
+                  navigate('/register')
                   console.log("Login Failed");
                 }}
               />
