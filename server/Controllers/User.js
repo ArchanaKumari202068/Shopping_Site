@@ -21,14 +21,25 @@ const LogInData = async (req, res) => {
     console.log(user);
     res.status(200);
     //check if the Email and Pasword is correct or not
-    const existingUser = await User.findOne({
-      Email: req.body.Email,
-      Password: req.body.Password,
-    });
+    var existingUser = null;
+
+    if(req.body.IsSignInWithGoogle ==true){
+      var existingUser = await User.findOne({
+        Email: req.body.Email,
+      });
+      console.log(existingUser)
+
+    }else{
+
+       var existingUser = await User.findOne({
+        Email: req.body.Email,
+        Password: req.body.Password,
+      });
+    }
+    
     if (!existingUser) {
       return res.status(400).send({ msg: "Usernot found" });
     }
-
     //login token
 
     const logintoken = createToken(String(existingUser._id));
@@ -58,6 +69,8 @@ const LogInData = async (req, res) => {
 //SignUp function
 const SignUpData = async (req, res) => {
   try {
+    console.log(req.body);
+
     console.log("Creating the user...");
     const SignUpData = req.body;
     console.log("check 1", SignUpData);
@@ -72,14 +85,22 @@ const SignUpData = async (req, res) => {
     }
 
     console.log(SignUpData);
-
-    var user_data = new User({
-      //signUpData = req.body , so i can use SignUpDta instead of req.bosy ex= Name: req.body.Name,
-      Name: SignUpData.Name,
-      Password: SignUpData.Password,
-      Email: SignUpData.Email,
-    });
-    user_data.save();
+    if (req.body.IsSignInWithGoogle == true) {
+      var user_data = new User({
+        Name: req.body.Name,
+        Email: req.body.Email,
+        IsSignInWithGoogle: true,
+      });
+      user_data.save();
+    } else {
+      var user_data = new User({
+        //signUpData = req.body , so i can use SignUpDta instead of req.bosy ex= Name: req.body.Name,
+        Name: SignUpData.Name,
+        Password: SignUpData.Password,
+        Email: SignUpData.Email,
+      });
+      user_data.save();
+    }
 
     console.log(user_data._id);
 

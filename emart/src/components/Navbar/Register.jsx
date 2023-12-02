@@ -4,7 +4,10 @@ import "./Register.css";
 import axios from "axios";
 import { contextCreated } from "../useContext/Context";
 import SignIn_img from "../assest/SignIn_img.jpg";
-
+import { GoogleOAuthProvider } from "@react-oauth/google";
+import { GoogleLogin } from '@react-oauth/google';
+import  { jwtDecode }  from 'jwt-decode'
+// import { googleLogout } from '@react-oauth/google';
 const Register = () => {
   const navigate = useNavigate();
   const [name, setName] = useState();
@@ -93,6 +96,39 @@ const Register = () => {
           <div className="SignUp_button">
             <button onClick={handleSignUpData}>Create Account</button>
           </div>
+          <GoogleOAuthProvider clientId="221793857279-a5hg5dhgd402phb78ufmjc6mb54vbp3c.apps.googleusercontent.com">
+            <GoogleLogin
+              onSuccess={async(credentialResponse) => {
+                const details = jwtDecode(credentialResponse.credential);
+                console.log(details);
+                console.log(credentialResponse);
+                try {
+                  const getToken = await axios.post(
+                    `${process.env.REACT_APP_BACKEND_URL}/SignUp`,
+                    {
+                      Name: details.name,
+                      Email: details.email,
+                      IsSignInWithGoogle:true
+                    }
+                  )
+                  console.log(getToken.data.token)
+                  localStorage.setItem("jwt", getToken.data.token);
+                  navigate('/')
+  
+                } catch (error) {
+                  alert("Email already exist ,please login with your Account ")
+                  navigate('/login')
+                  console.log("error in login with google",error)
+                  
+                }
+
+
+              }}
+              onError={() => {
+                console.log("Login Failed");
+              }}
+            />
+          </GoogleOAuthProvider>
         </div>
       </div>
     </>

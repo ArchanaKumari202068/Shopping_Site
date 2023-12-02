@@ -5,6 +5,7 @@ const UserDetails = new mongoose.Schema({
     Password: {type:String},
     Email:{type:String},
     cart:{type:Array},
+    IsSignInWithGoogle:{type:Boolean,default:false}
    
 })
 const userData =mongoose.model("User",UserDetails)

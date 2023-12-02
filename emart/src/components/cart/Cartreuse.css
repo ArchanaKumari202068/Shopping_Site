@@ -25,12 +25,13 @@
     flex-direction: row;
     gap: 2em;
 }
-#decrement p,#increment p{
+#decrement button,#increment button{
     height: 3rem;
     width: 3rem;
     font-size: 1.5em;
     font-weight: 900;
     background-color: #0084d6;
+    border: none;
     color: #ffff;
     border-radius: 50%;
     /* text-align: center; */

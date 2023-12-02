@@ -3,9 +3,11 @@ import "./Navbar.css";
 import { Link, useNavigate } from "react-router-dom";
 import { contextCreated } from "../useContext/Context";
 import navLogo from "../assest/logo@2x-free-img.png";
-const Navbar = () => {
+import Cart from "../cart/Cart";
+const Navbar = (props) => {
   const navigate = useNavigate();
   const userContext = useContext(contextCreated);
+  const totalItemsInCart = useContext(contextCreated);
   console.log(userContext);
   const [bars, setBars] = useState(false);
   const handleGetCartdata = () => {
@@ -13,7 +15,7 @@ const Navbar = () => {
   };
   const handleRemoveToken = () => {
     try {
-      const removeToken = localStorage.removeItem("jwtToken");
+      const removeToken = localStorage.removeItem("jwt");
       console.log(removeToken);
       userContext.setUser(null);
     } catch (error) {
@@ -89,16 +91,22 @@ const Navbar = () => {
           <div id="nav_items">
             <ul>
               <li>
-                <Link to="/" onClick={handlemenuBar}>Home</Link>
+                <Link to="/" onClick={handlemenuBar}>
+                  Home
+                </Link>
               </li>
               {/* <li>
                 <Link to="/">Products</Link>
               </li> */}
               <li>
-                <Link to="/women" onClick={handlemenuBar}>Women</Link>
+                <Link to="/women" onClick={handlemenuBar}>
+                  Women
+                </Link>
               </li>
               <li>
-                <Link to="/men" onClick={handlemenuBar}>Men</Link>
+                <Link to="/men" onClick={handlemenuBar}>
+                  Men
+                </Link>
               </li>
               {/* <li>
                 <Link to="/">About</Link>
@@ -129,11 +137,12 @@ const Navbar = () => {
             {userContext.user ? (
               <>
                 <button onClick={handleGetCartdata}>
-                  <i className="fa fa-shopping-cart"></i>Cart 0
+                  <i className="fa fa-shopping-cart"></i>Cart{" "}
+                  {totalItemsInCart.cart.length}
                 </button>
-                <button  onClick={handleRemoveToken }>
-                  <div id="btn_SignOut" >
-                  <i className="fa fa-user-plus" ></i>SignOut
+                <button onClick={handleRemoveToken}>
+                  <div id="btn_SignOut">
+                    <i className="fa fa-user-plus"></i>SignOut
                   </div>
                 </button>
               </>

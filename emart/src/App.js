@@ -40,6 +40,11 @@ function App() {
   useEffect(() => {
     authenticateUSer();
   }, [location]);
+  
+  useEffect(()=>{
+    
+    user_id.getCartDetails()
+  },[user_id.user,location])
 
   return (
     <>
@@ -54,7 +59,6 @@ function App() {
         <Route path="/cart" element={<Cart />} />
         <Route path="/checkout" element={<ShippingForm />} />
         <Route path="/payment_successfull" element={<PaymentSuccessful />} />
-
       </Routes>
       <Footer />
     </>

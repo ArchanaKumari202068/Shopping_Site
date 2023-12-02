@@ -28,6 +28,7 @@ const ProductCards = (props) => {
             quantity: 1,
           }
         );
+        checkUserLogin.getCartDetails();
         alert("Added to Cart")
         console.log(productdata);
       } catch (err) {

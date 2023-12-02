@@ -4,6 +4,8 @@ import "./Cart.css";
 import Cartreuse from "./Cartreuse";
 import axios from "axios";
 import { contextCreated } from "../useContext/Context";
+import Navbar from "../Navbar/Navbar";
+
 // import axios from "axios";
 
 // import { useEffect } from "react";
@@ -11,56 +13,65 @@ import { contextCreated } from "../useContext/Context";
 const Cart = (props) => {
   const navigate = useNavigate();
   const checkUser = useContext(contextCreated);
-  const [items, setItems] = useState([]);
+  // const [items, setItems] = useState([]);
+
   const [totalprice, setTotalPrice] = useState(0);
-  console.log("items data", items);
-  console.log(checkUser);
-  console.log("checkuser", checkUser.user);
+
+  const totalItemsInCart = useContext(contextCreated);
+  // console.log("items data", totalItemsInCart.cart);
+  // console.log(checkUser);
+  // console.log("checkuser", checkUser.user);
   const calTotal = () => {
     var totalPriceOfCardProduct = 0;
-    console.log("Length of Cart", items.length);
-    for (let i = 0; i < items.length; i++) {
-      var price = items[i].product_price * items[i].user_quantity;
+    console.log("Length of Cart", totalItemsInCart.cart.length);
+    for (let i = 0; i < totalItemsInCart.cart.length; i++) {
+      var price =
+        totalItemsInCart.cart[i].product_price *
+        totalItemsInCart.cart[i].user_quantity;
       totalPriceOfCardProduct += price;
       console.log("price of the items", price);
     }
+    // totalItemsInCart.setLengthOfCart(totalItemsInCart.cart.length)
+    // const lengthOfCart={lengthofcart}
     // totalPriceOfCardProduct = price;
+
     console.log("total price", totalPriceOfCardProduct);
     setTotalPrice(totalPriceOfCardProduct);
   };
-  const handlecheckout =async() =>{
-   try {
-     const res = await axios.post(`http://localhost:5000/create-checkout-session/`,{
-       id:checkUser.user
-     })
-     console.log(res.data.url)
-     window.location.replace(res.data.url);
-    //  navigate(res.data.url)
-   } catch (error) {
-    console.log(error)
-    
-   }
 
-  }
-
-
-  async function getCartDetails() {
+  const handlecheckout = async () => {
     try {
-      // const userId = id.setUser()
-      const id = await axios.get(
-        `${process.env.REACT_APP_BACKEND_URL}/cart/${checkUser.user}`
+      const res = await axios.post(
+        `http://localhost:5000/create-checkout-session/`,
+        {
+          id: checkUser.user,
+        }
       );
-
-      // console.log("id.data", id.data);
-      var x = id.data;
-      console.log(x);
-      setItems(x);
-
-      // console.log(productId)
-    } catch (err) {
-      console.log("eror in getting the cart products", err);
+      console.log(res.data.url);
+      window.location.replace(res.data.url);
+      //  navigate(res.data.url)
+    } catch (error) {
+      console.log(error);
     }
-  }
+  };
+
+  // async function getCartDetails() {
+  //   try {
+  //     // const userId = id.setUser()
+  //     const id = await axios.get(
+  //       `${process.env.REACT_APP_BACKEND_URL}/cart/${checkUser.user}`
+  //     );
+
+  //     // console.log("id.data", id.data);
+  //     var x = id.data;
+  //     console.log(x);
+  //     setItems(x);
+
+  //     // console.log(productId)
+  //   } catch (err) {
+  //     console.log("eror in getting the cart products", err);
+  //   }
+  // }
 
   useEffect(() => {
     if (!localStorage.getItem("jwt")) {
@@ -70,27 +81,27 @@ const Cart = (props) => {
   }, []);
 
   useEffect(() => {
-    getCartDetails();
+    // getCartDetails();
   }, [checkUser]);
 
   useEffect(() => {
     calTotal();
-  }, [items]);
+  }, [checkUser.cart]);
   if (checkUser.user == null) {
     return <h1>Hello</h1>;
   }
 
   return (
     <>
+      {/* <Navbar lengthOfCart={lengthofcart} /> */}
+
       <div className="Cart_page">
         <div id="Card_container">
           <div id="Cart_header">
             <h1> My Cart</h1>
-            {/* <h2>TotalPrice:{totalprice}</h2> */}
           </div>
-          {items.map((ele) => {
-            // return ele.product_details_title+" "
-            console.log(ele);
+          {totalItemsInCart.cart.map((ele) => {
+            // console.log(ele);
             return (
               <div id="cartreuse_container">
                 <Cartreuse
@@ -99,8 +110,9 @@ const Cart = (props) => {
                   price={ele.product_price}
                   quantity={ele.user_quantity}
                   productId={ele._id}
-                  getCartDetails={getCartDetails}
+                  getCartDetails={totalItemsInCart.getCartDetails}
                   setTotalPrice={setTotalPrice}
+                  calTotalprice={calTotal}
                 />
               </div>
             );

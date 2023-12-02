@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 const product = require("../Models/ProductSchema");
 const Reviews = require("../Models/Reviews");
-const userDetails = require("../Models/UserSchema")
+const userDetails = require("../Models/UserSchema");
 // const product =require("../Models/UserSchema")
 const postProductByReviews = async (req, res) => {
   try {
@@ -34,10 +34,10 @@ const postProductByReviews = async (req, res) => {
     ]);
     console.log(calAvgRating[0].product_Avgrating);
     const updateRating = await product.updateOne(
-      {_id: product_id},
-      {$set:{product_Avgrating: calAvgRating[0].product_Avgrating }}
+      { _id: product_id },
+      { $set: { product_Avgrating: calAvgRating[0].product_Avgrating } }
     );
-    console.log(updateRating)
+    console.log(updateRating);
     res.status(200).send(postProducts);
   } catch (err) {
     console.log("error in posting the product by reviews", err);
@@ -47,8 +47,18 @@ const postProductByReviews = async (req, res) => {
 const getProductByReviews = async (req, res) => {
   try {
     const product_id = req.params.id;
-    const getUserId= await Reviews.aggregate([{$match:{ product_id: new mongoose.Types.ObjectId(product_id) }},{$lookup:{from:"users",localField:"user_id",foreignField:"_id",as:"UserId"}}])
-    console.log(getUserId)
+    const getUserId = await Reviews.aggregate([
+      { $match: { product_id: new mongoose.Types.ObjectId(product_id) } },
+      {
+        $lookup: {
+          from: "users",
+          localField: "user_id",
+          foreignField: "_id",
+          as: "UserId",
+        },
+      },
+    ]);
+    console.log(getUserId);
     console.log(product_id);
     // const getProduct = await Reviews.find({ product_id: product_id });
     res.status(200).send(getUserId);

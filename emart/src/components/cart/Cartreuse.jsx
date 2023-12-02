@@ -11,7 +11,7 @@ const Cartreuse = (props) => {
 
   const handleIncrement = async () => {
     setIncrement(increment + 1);
-  props.setTotalPrice((prev)=> prev+props.price)
+    props.setTotalPrice((prev) => prev + props.price);
 
     const idOfProduct = await axios.post(
       `${process.env.REACT_APP_BACKEND_URL}/quantity/${id.user}`,
@@ -25,7 +25,8 @@ const Cartreuse = (props) => {
 
   const handleDecreament = async () => {
     setIncrement(increment - 1);
-    props.setTotalPrice((prev)=> prev-props.price)
+
+    props.setTotalPrice((prev) => prev - props.price);
 
     const idOfProduct = await axios.post(
       `${process.env.REACT_APP_BACKEND_URL}/quantity/${id.user}`,
@@ -66,11 +67,13 @@ const Cartreuse = (props) => {
         </div>
         <div id="quantity">
           <div id="decrement">
-            <p onClick={handleDecreament}>-</p>
+            <button disabled={increment == 0} onClick={handleDecreament}>
+              -
+            </button>
           </div>
           <h3>{increment}</h3>
           <div id="increment">
-            <p onClick={handleIncrement}>+</p>
+            <button onClick={handleIncrement}>+</button>
           </div>
         </div>
         <div id="ProductSummary">
