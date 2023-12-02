@@ -42,7 +42,7 @@ const Cart = (props) => {
   const handlecheckout = async () => {
     try {
       const res = await axios.post(
-        `http://localhost:5000/create-checkout-session/`,
+        `${process.env.REACT_APP_BACKEND_URL}/create-checkout-session/`,
         {
           id: checkUser.user,
         }
