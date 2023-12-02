@@ -5,8 +5,8 @@ import axios from "axios";
 import { contextCreated } from "../useContext/Context";
 import Login_img from "../assest/Login_img.jpg";
 import { GoogleOAuthProvider } from "@react-oauth/google";
-import { GoogleLogin } from '@react-oauth/google';
-import  { jwtDecode }  from 'jwt-decode'
+import { GoogleLogin } from "@react-oauth/google";
+import { jwtDecode } from "jwt-decode";
 // import { contextCreated } from "../useContext/Context";
 
 const Login = () => {
@@ -79,27 +79,29 @@ const Login = () => {
 
             <GoogleOAuthProvider clientId="221793857279-a5hg5dhgd402phb78ufmjc6mb54vbp3c.apps.googleusercontent.com">
               <GoogleLogin
-                onSuccess={async(credentialResponse) => {
+                onSuccess={async (credentialResponse) => {
                   const details = jwtDecode(credentialResponse.credential);
-                  console.log(details.name,details.email);
+                  console.log(details.name, details.email);
                   console.log(credentialResponse);
-                  const loginwithGoogle = await axios.post(
-                    `${process.env.REACT_APP_BACKEND_URL}/login`,
-                    {
-                      Email: details.email,
-                      IsSignInWithGoogle:true
-                    }
-                  );
-                  
-                  if (loginwithGoogle.status ==200) {
-                    console.log(loginwithGoogle.data.logintoken)
-                    localStorage.setItem("jwt", loginwithGoogle.data.logintoken);
-                    navigate('/')
-                  } else {
-                    alert("Do not have account,Please create account")
-                    navigate('/register')
-                  }
+                  try {
+                    const loginwithGoogle = await axios.post(
+                      `${process.env.REACT_APP_BACKEND_URL}/login`,
+                      {
+                        Email: details.email,
+                        IsSignInWithGoogle: true,
+                      }
+                    );
 
+                    console.log(loginwithGoogle.data.logintoken);
+                    localStorage.setItem(
+                      "jwt",
+                      loginwithGoogle.data.logintoken
+                    );
+                    navigate("/");
+                  } catch (error) {
+                    alert("Do not have account,Please create account");
+                    navigate("/register");
+                  }
                 }}
                 onError={() => {
                   console.log("Login Failed");
