@@ -98,7 +98,7 @@ const ProductCards = (props) => {
         <h3>{props.products_titles}</h3>
         <div id="Product_content_heading">
           <span>{props.category}</span>
-          <span>Price: ${props.price}</span>
+          <span>Price: ₹{props.price}</span>
         </div>
 
         {props.showColors !== false ? (
@@ -190,11 +190,4 @@ const ProductCards = (props) => {
 
 export default ProductCards;
 
-/* <div className='Products_details'>
-        <ProductsPage
-        Product_img= {Product1img}
-        products_titles="Jeans" 
-        category="Women"
-        price="$500"
-        />
-    </div> */
+

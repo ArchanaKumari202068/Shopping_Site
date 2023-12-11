@@ -27,19 +27,25 @@ const Reviews = (props) => {
 
     const postReviews = async () => {
       try {
-        const postReviewOfProduct = await axios.post(
-          `${process.env.REACT_APP_BACKEND_URL}/reviews`,
-          {
-            product_id: id,
-            user_id: userId.user,
-            reviews: Reviews,
-            rating: Rating,
-            postedOn: new Date(),
-          }
-        );
-        getReviewsOfProduct();
-        console.log("Reviews data posted", postReviewOfProduct);
-        props.getProductDetailsById();
+        if(userId.user!=null){
+
+          const postReviewOfProduct = await axios.post(
+            `${process.env.REACT_APP_BACKEND_URL}/reviews`,
+            {
+              product_id: id,
+              user_id: userId.user,
+              reviews: Reviews,
+              rating: Rating,
+              postedOn: new Date(),
+            }
+          );
+          getReviewsOfProduct();
+          console.log("Reviews data posted", postReviewOfProduct);
+          props.getProductDetailsById();
+        }else{
+
+          alert("Login to Post the Reviews")
+        }
       } catch (error) {
         console.log(error, "error in posting the date");
       }
@@ -64,7 +70,7 @@ const Reviews = (props) => {
           {getAllReviews.map((ele) => {
             return (
               <CardReviews
-                userName={ele.UserId[0].Name}
+                userName={ele.UserId[0]?.Name}
                 rating={ele.rating}
                 reviews={ele.reviews}
                 reviews_posted_date={ele.postedOn}

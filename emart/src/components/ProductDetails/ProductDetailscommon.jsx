@@ -61,19 +61,9 @@ const ProductDetailscommon = (props) => {
           <img src={product.product_img} />
         </div>
         <div className="Product_details_content">
-          <div className="product_nav">
-            <a>
-              <li>Home/</li>
-            </a>
-            <a>
-              <li>{product.product_categories}/</li>
-            </a>
-            <a>
-              <li>{product.product_details_title}</li>
-            </a>
-          </div>
 
-          <div className="Product_details_content">
+
+         
             <h1>{product.product_details_title}</h1>
             <p>
               <span>{product.product_price}</span>+ Free Shipping
@@ -91,7 +81,7 @@ const ProductDetailscommon = (props) => {
             <p>Rating:{product.product_Avgrating?.toFixed(2)}</p>
           </div>
         </div>
-      </div>
+    
       <div className="sub-section">
         <div className="btns_Reviews_description">
           <button
@@ -113,7 +103,7 @@ const ProductDetailscommon = (props) => {
           <div className="product-desc">
             <h3>Product description</h3>
             <div className="product_description">
-              <p>{product.product_about}</p>
+              <pre>{product.product_about}</pre>
             </div>
           </div>
         ) : (
@@ -126,26 +116,26 @@ const ProductDetailscommon = (props) => {
         <div className="related_product">
           <div className="Products_details">
             <ProductCards
-              Product_img={Product2Img}
+              product_img={Product2Img}
               products_titles="Shoe"
               category="men"
-              price="$300"
+              price="300"
             />
           </div>
           <div className="Products_details">
             <ProductCards
-              Product_img={Product3Img}
+              product_img={Product3Img}
               products_titles="Anchor Bracelet"
               category="Women"
-              price="$200"
+              price="200"
             />
           </div>
           <div className="Products_details">
             <ProductCards
-              Product_img={Product4Img}
+              product_img={Product4Img}
               products_titles="Light Brown Purse"
               category="Women"
-              price="$250"
+              price="250"
             />
           </div>
         </div>

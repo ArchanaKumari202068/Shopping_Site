@@ -4,12 +4,16 @@ import { Link, useNavigate } from "react-router-dom";
 import { contextCreated } from "../useContext/Context";
 import navLogo from "../assest/logo@2x-free-img.png";
 import Cart from "../cart/Cart";
+import axios from "axios";
 const Navbar = (props) => {
   const navigate = useNavigate();
   const userContext = useContext(contextCreated);
   const totalItemsInCart = useContext(contextCreated);
   console.log(userContext);
   const [bars, setBars] = useState(false);
+
+
+
   const handleGetCartdata = () => {
     navigate("/cart");
   };
@@ -95,9 +99,9 @@ const Navbar = (props) => {
                   Home
                 </Link>
               </li>
-              {/* <li>
-                <Link to="/">Products</Link>
-              </li> */}
+              <li>
+                <Link to="/product" onClick={handlemenuBar}>Products</Link>
+              </li>
               <li>
                 <Link to="/women" onClick={handlemenuBar}>
                   Women
@@ -117,7 +121,7 @@ const Navbar = (props) => {
             </ul>
           </div>
           <div id="search_icon">
-            <input id="search_input" />
+            <input id="search_input" value={props.search} onChange={(e)=>{props.setSearch(e.target.value)}}   />
             <svg
               xmlns="http://www.w3.org/2000/svg"
               fill="none"

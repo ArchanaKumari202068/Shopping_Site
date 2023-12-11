@@ -18,9 +18,9 @@ const ProductsPage = () => {
   const [products, setProducts] = useState([]);
   useEffect(() => {
     axios
-      .get(`${process.env.REACT_APP_BACKEND_URL}/ProductDetails`)
+      .get(`${process.env.REACT_APP_BACKEND_URL}/products?limit=10&skip=0`)
       .then((res) => {
-        setProducts(res.data);
+        setProducts(res.data.ProductData);
       });
   }, []);
 
@@ -32,7 +32,7 @@ const ProductsPage = () => {
 
           {/* <p></p> */}
         </div>
-        <div></div>
+        {/* <div></div> */}
         <div className="Project_details_cards">
           {products.map((product) => {
             return (

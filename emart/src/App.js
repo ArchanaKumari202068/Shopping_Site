@@ -10,14 +10,16 @@ import "./App.css";
 import Men from "./components/Navbar/Men/Men";
 import Women from "./components/Navbar/Women/Women";
 import axios from "axios";
-import { useContext, useEffect } from "react";
+import { useContext, useEffect, useState } from "react";
 import { contextCreated } from "./components/useContext/Context";
 import ShippingForm from "./components/Order/Shipping_page";
 import PaymentSuccessful from "./components/cart/payment/PaymentSuccessful";
+import NavProduct from "./components/Navbar/Nav_Product/NavProduct";
 
 function App() {
   const location = useLocation();
   const user_id = useContext(contextCreated);
+  const [search,setSearch] = useState("");
 
   const authenticateUSer = async () => {
     const token = localStorage.getItem("jwt");
@@ -48,10 +50,12 @@ function App() {
 
   return (
     <>
-      <Navbar />
+      <Navbar setSearch={setSearch} search={search} />
       <Routes>
         <Route path="/women" element={<Women />}></Route>
         <Route path="/men" element={<Men />}></Route>
+        
+        <Route path="/product" element={<NavProduct search={search} />}></Route>
         <Route path="/" element={<MainPage />}></Route>
         <Route path="/product/:id/" element={<ProductsDetails />}></Route>
         <Route path="/login" element={<Login />} />

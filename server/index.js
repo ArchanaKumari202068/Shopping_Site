@@ -4,6 +4,8 @@ const {
   getProductDetailsById,
   IncreamentOrDecreament,
   getAllProductByCategories,
+  getProducts,
+  
 } = require("./Controllers/Product.js");
 
 const {
@@ -71,6 +73,13 @@ app.get("/reviews/:id", getProductByReviews);
 
 app.post('/create-checkout-session',createCheckout)
 
+//pagination
+
+app.get("/products",getProducts)
+
+
+//Searching
+// app.get("/searchProduct",searchProducts)
 
 app.listen(port, () => {
   console.log(`Server is running on port ${port}`);

@@ -1,0 +1,51 @@
+.products{
+    width: 100%; 
+    min-height: 100vh;
+    height: auto; 
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    /* border: 2px solid red; */
+    gap: 2.5em;
+    justify-content: space-evenly;
+    padding: 5%;
+}
+.Products_pagination{
+    display: flex;
+    width: 220px;
+    /* border: 2px solid yellow; */
+
+}
+.pagination{
+    display: flex;
+    justify-content: center;
+    /* margin: 15px 0;
+    padding: 10px; */
+}
+.pagination > span{
+    border: 1px solid gray;
+    height: 2em;
+    width: 2em;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 2em;
+    cursor: pointer;
+
+}
+.active{
+    background-color: #0084d6;
+    color: #ffff;
+    border: none;
+}
+.ProductPaginationPage{
+    min-height: 80vh;
+    position: relative;
+}
+.ProductPaginationPage h2{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    padding-top: 5%;
+}

@@ -118,9 +118,58 @@ const getAllProductByCategories = async (req, res) => {
   }
 };
 
+//Function for getProducts Navigation
+
+const getProducts = async (req, res) => {
+  try {
+    const limit = req.query.limit;
+    const skip = req.query.skip;
+    const search = req.query.search;
+    let filter = {};
+    if (search) {
+      filter = {
+        product_details_title: { $regex: `.*${search}.*`, $options: "i" },
+      };
+    }
+    const totalCount = await Product.find(filter).count();
+    const ProductData = await Product.find(filter).skip(skip).limit(limit);
+    // console.log(ProductData)
+    // const totalproduct
+    // res.status(200)
+    res.send({
+      ProductData: ProductData,
+      totalPages: totalCount / limit,
+      totalProducts: totalCount,
+    });
+  } catch (err) {
+    console.log("error in get productpagination", err);
+    res.status(500).send("Internal Server Error");
+  }
+};
+
+//function to searched product
+
+// const searchProducts = async (req, res) => {
+//   try {
+//     const searchedProductTitle = req.query.title;
+
+//     const getSearchedProducts = await Product.aggregate([
+//       { $match: { product_details_title: searchedProductTitle } },
+//     ]);
+//     console.log("get searched products ", getSearchedProducts);
+//     res.status(200).send(getSearchedProducts);
+//   } catch (err) {
+//     console.log("Error in searching the products", err);
+//     res.send("Internal Server error");
+//   }
+// };
+
+//function for searching products
+
 module.exports = {
   getAllProductDetails,
   getProductDetailsById,
   IncreamentOrDecreament,
   getAllProductByCategories,
+  getProducts,
 };

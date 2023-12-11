@@ -36,7 +36,7 @@ const SideNavbar = (props) => {
         <div id="priceRangeSlider"></div>
         <div id="priceSliderWrapper">
           <button>FILTER</button>
-          <p>Price:$40-$290</p>
+          <p>Price:₹40-₹290</p>
         </div>
       </div>
       <div id="Categories">

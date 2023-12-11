@@ -1,19 +1,32 @@
 const mongoose = require("mongoose");
 const Product = require("../Models/ProductSchema");
 // const uri = 'mongodb+srv://archanakumari202068:<password>@stackoverflow-clone.rhh4ud3.mongodb.net/';
-mongoose.connect(
-  "mongodb+srv://Ishika123:Ishika123@cluster0.onpvdxd.mongodb.net/emart_database",
-  {
-    useNewUrlParser: true,
+const ConnectedDB = async(req,res)=>{
+
+  try {
+      await mongoose.connect(
+      "mongodb+srv://Ishika123:Ishika123@cluster0.onpvdxd.mongodb.net/emart_database",
+      {
+        useNewUrlParser: true,
+      }
+    );
+    console.log("Connected to db")
+    fs.createReadStream(__dirname + "/productData_ShoppingSite-Electronics-0.csv").pipe(parser);
+
+  } catch (error) {
+    console.log(error,"error in connecting to db")
+    
   }
-);
+
+}
+ConnectedDB()
 
 var fs = require("fs");
 var { parse } = require("csv-parse");
 
 var parser = parse({ columns: true }, async function (err, csvData) {
   //delete the previous data and 
-  await Product.deleteMany();
+  // await Product.deleteMany();
   csvData.forEach((product) => {
     var new_products = new Product({
       product_img: product.product_img,
@@ -42,4 +55,4 @@ var parser = parse({ columns: true }, async function (err, csvData) {
     console.log(err);
   }
 });
-fs.createReadStream(__dirname + "/products.csv").pipe(parser);
+
