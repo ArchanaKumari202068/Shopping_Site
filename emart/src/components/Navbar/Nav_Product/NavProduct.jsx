@@ -27,7 +27,7 @@ const NavProduct = (props) => {
     const res = await axios.get(
       `${process.env.REACT_APP_BACKEND_URL}/products?limit=10&skip=${
         page * 10 - 10
-        
+
       }&search=${props.search}`
     );
     setLoading(false);
@@ -48,7 +48,7 @@ const NavProduct = (props) => {
 
   return (
     <div className="ProductPaginationPage">
-      {props.search}
+      {/* {props.search} */}
       <h2>Total Products:{totalProducts}</h2>
       <FadeLoader
         color="#0084d6"

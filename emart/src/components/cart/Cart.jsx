@@ -122,7 +122,7 @@ const Cart = (props) => {
               <p>TotalPrice:</p>
             </div>
             <div id="cart_price_details">
-              <button>${totalprice}</button>
+              <button>₹{totalprice}</button>
             </div>
           </div>
         </div>
@@ -133,11 +133,11 @@ const Cart = (props) => {
           <div id="checkout_content">
             <div className="checkout_price_div">
               <p>SubTotal: </p>
-              <p>${totalprice}</p>
+              <p>{totalprice}</p>
             </div>
             <div className="checkout_price_div">
-              <p>Total: </p>
-              <p>${totalprice}</p>
+              <p>₹Total: </p>
+              <p>₹{totalprice}</p>
             </div>
           </div>
           <div id="checkout_btn">

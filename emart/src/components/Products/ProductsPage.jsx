@@ -13,14 +13,18 @@ import qualityfreeimg from "../assest/quality-free-img.png";
 import lockfreeimg from "../assest/lock-free-img.png";
 import globefreeimg from "../assest/globe-free-img.png";
 import axios from "axios";
+import FadeLoader from "react-spinners/FadeLoader";
 
 const ProductsPage = () => {
   const [products, setProducts] = useState([]);
+  const [loading, setLoading] = useState(false);
   useEffect(() => {
+    setLoading(true);
     axios
       .get(`${process.env.REACT_APP_BACKEND_URL}/products?limit=10&skip=0`)
       .then((res) => {
         setProducts(res.data.ProductData);
+        setLoading(false);
       });
   }, []);
 
@@ -34,6 +38,16 @@ const ProductsPage = () => {
         </div>
         {/* <div></div> */}
         <div className="Project_details_cards">
+          <FadeLoader
+            color="#0084d6"
+            loading={loading}
+            cssOverride={{
+              position: "absolute",
+              top: "50%",
+              left: "50%",
+              zIndex: "100",
+            }}
+          />
           {products.map((product) => {
             return (
               <div className="Products_details">

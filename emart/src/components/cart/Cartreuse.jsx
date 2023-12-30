@@ -77,7 +77,7 @@ const Cartreuse = (props) => {
           </div>
         </div>
         <div id="ProductSummary">
-          <p>Price: ${props.price * increment}</p>
+          <p>Price: ₹{props.price * increment}</p>
           <div id="Remove_productToCart" onClick={handleDelete}>
             <svg
               xmlns="http://www.w3.org/2000/svg"
